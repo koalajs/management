@@ -3,16 +3,19 @@
     <el-aside width="25vw">
     </el-aside>
     <el-main>
-      <login-form title="KoalaJs" />
+      <login-form />
     </el-main>
+    <language />
   </el-container>
 </template>
 
 <script>
 import LoginForm from '@/components/LoginForm'
+import Language from '@/components/Language'
 export default {
   components: {
-    LoginForm
+    LoginForm,
+    Language
   }
 }
 </script>

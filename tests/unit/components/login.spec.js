@@ -5,12 +5,4 @@ const localVue = createLocalVue()
 localVue.use(ElementUI)
 
 describe('HelloWorld.vue', () => {
-  it('renders props.title when passed', () => {
-    const title = 'new message'
-    const wrapper = shallowMount(LoginForm, {
-      localVue,
-      propsData: { title }
-    })
-    expect(wrapper.text()).toMatch(title)
-  })
 })
