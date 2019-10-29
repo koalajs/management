@@ -6,16 +6,19 @@
       <login-form />
     </el-main>
     <language />
+    <version />
   </el-container>
 </template>
 
 <script>
 import LoginForm from '@/components/LoginForm'
 import Language from '@/components/Language'
+import Version from '@/components/Version'
 export default {
   components: {
     LoginForm,
-    Language
+    Language,
+    Version
   }
 }
 </script>
