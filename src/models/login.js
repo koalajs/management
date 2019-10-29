@@ -1,5 +1,5 @@
 import localForage from 'localforage'
-import { TOKEN_KEY } from './consts.js'
+import { TOKEN_KEY } from '../common/consts.js'
 export default {
   isLogin () {
     return new Promise((resolve, reject) => {

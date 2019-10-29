@@ -1,7 +1,7 @@
 <template>
   <div class="login-form">
     <el-row>
-      <el-col><h1>{{title}}</h1></el-col>
+      <el-col><h1>{{$t('main.title')}}</h1></el-col>
     </el-row>
     <el-row>
       <el-col>
