@@ -46,11 +46,9 @@ export default {
   },
   methods: {
     setLanguage (l) {
-      // this.$i18n.locale = clone(l)
       this.$i18n.setLocale(l)
     },
     onChangeLanguge (e) {
-      console.log('show change language', e)
       this.setLanguage(e)
     }
   }
