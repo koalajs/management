@@ -3,7 +3,8 @@
     <el-row>
       <el-col>
         <el-select
-          v-model="lang"
+          :value="lang"
+          @change="onChangeLanguge"
         >
           <el-option
             v-for="i in options"
@@ -18,11 +19,10 @@
 </template>
 
 <script>
-import i18n from '@/plugins/i18n'
+// import { clone } from 'ramda'
 export default {
   data () {
     return {
-      lang: 'zh_cn',
       options: [
         {
           value: 'zh_cn',
@@ -39,12 +39,19 @@ export default {
       ]
     }
   },
-  mounted () {
-    this.initLanguage()
+  computed: {
+    lang: function () {
+      return this.$i18n.locale
+    }
   },
   methods: {
-    initLanguage () {
-      this.lang = i18n.locale
+    setLanguage (l) {
+      // this.$i18n.locale = clone(l)
+      this.$i18n.setLocale(l)
+    },
+    onChangeLanguge (e) {
+      console.log('show change language', e)
+      this.setLanguage(e)
     }
   }
 }

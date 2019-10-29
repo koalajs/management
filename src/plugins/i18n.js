@@ -16,18 +16,17 @@ const i18n = new VueI18n({
   messages: locales
 })
 
+i18n.setLocale = async function (v) {
+  await localForage.setItem(LOCALE_KEY, v)
+  this.locale = v
+}
+
 export const setup = async () => {
   let lang = await localForage.getItem(LOCALE_KEY)
   if (locales[lang] === undefined) {
     lang = DEFAULT_LANG
   }
   await localForage.setItem(LOCALE_KEY, lang)
-
-  // Object.keys(locales).forEach(lang => {
-  //   document.body.classList.remove(`lang-${lang}`)
-  // })
-  // document.body.classList.add(`lang-${lang}`)
-  // document.body.setAttribute('lang', lang)
 
   Vue.config.lang = lang
   i18n.locale = lang
