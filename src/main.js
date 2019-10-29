@@ -3,6 +3,10 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+import './assets/theme/index.css'
+import ElementUI from 'element-ui'
+
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 
