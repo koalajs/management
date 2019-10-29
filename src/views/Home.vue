@@ -1,7 +1,5 @@
 <template>
-  <div class="home">
-    <button @click="login">Login</button>
-  </div>
+  <div class="home"></div>
 </template>
 
 <script>
