@@ -8,6 +8,9 @@
         <el-input
           placeholder="Username"
           v-model="loginData.username"
+          :clearable="true"
+          prefix-icon="el-icon-user"
+          autofocus
         />
       </el-col>
     </el-row>
@@ -17,12 +20,16 @@
           type="password"
           placeholder="Password"
           v-model="loginData.password"
+          :clearable="true"
+          :show-password="true"
+          prefix-icon="el-icon-star-off"
         />
       </el-col>
     </el-row>
     <el-row>
       <el-col>
         <el-button
+          ref="btn"
           type="primary"
           @click="doLogin"
           :loading="btnLoginStatus"
@@ -34,6 +41,8 @@
 
 <script>
 import login from '@/models/login'
+import { SchemaModel, StringType } from 'schema-typed'
+import { reduce, reduced, values } from 'ramda'
 export default {
   name: 'LoginForm',
   props: {
@@ -59,10 +68,13 @@ export default {
       this.isRequesting = b
     },
     checkData (data) {
-      return {
-        hasError: false,
-        errorMessage: 'xxx'
-      }
+      const mod = SchemaModel({
+        username: StringType().isRequired('用户名是必须的'),
+        password: StringType().isRequired('密码是必须的')
+      })
+      const result = mod.check(data)
+      console.log('show result', result)
+      return reduce((a, v) => v.hasError ? reduced(v) : v, {}, values(result))
     },
     doLogin () {
       const result = this.checkData(this.loginData)

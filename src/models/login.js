@@ -14,10 +14,12 @@ export default {
     })
   },
   setToken (token) {
-    localForage.setItem(TOKEN_KEY, token).then(res => {
-      return true
-    }).catch(e => {
-      return false
+    return new Promise((resolve, reject) => {
+      localForage.setItem(TOKEN_KEY, token).then(res => {
+        resolve(true)
+      }).catch(e => {
+        reject(e)
+      })
     })
   },
   getToken () {
