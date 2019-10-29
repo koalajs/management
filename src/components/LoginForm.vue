@@ -6,7 +6,7 @@
     <el-row>
       <el-col>
         <el-input
-          placeholder="Username"
+          :placeholder="$t('login.username')"
           v-model="loginData.username"
           :clearable="true"
           prefix-icon="el-icon-user"
@@ -18,7 +18,7 @@
       <el-col>
         <el-input
           type="password"
-          placeholder="Password"
+          :placeholder="$t('login.password')"
           v-model="loginData.password"
           :clearable="true"
           :show-password="true"
@@ -33,7 +33,7 @@
           type="primary"
           @click="doLogin"
           :loading="btnLoginStatus"
-        > 登 录 </el-button>
+          > {{$t('login.login_btn')}} </el-button>
       </el-col>
     </el-row>
   </div>
@@ -69,8 +69,8 @@ export default {
     },
     checkData (data) {
       const mod = SchemaModel({
-        username: StringType().isRequired('用户名是必须的'),
-        password: StringType().isRequired('密码是必须的')
+        username: StringType().isRequired(this.$t('login.need_username')),
+        password: StringType().isRequired(this.$t('login.need_password'))
       })
       const result = mod.check(data)
       console.log('show result', result)

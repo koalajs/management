@@ -1,5 +1,6 @@
 import localForage from 'localforage'
 import { TOKEN_KEY } from '../common/consts.js'
+import api from '@/plugins/api'
 export default {
   isLogin () {
     return new Promise((resolve, reject) => {
@@ -34,7 +35,11 @@ export default {
   login (data) {
     return new Promise((resolve, reject) => {
       // 在这里进行axios操作
-      resolve(true)
+      api.get('auth').then(res => {
+        resolve(true)
+      }).catch(e => {
+        reject(e)
+      })
     })
   },
   logout () {
