@@ -1,18 +1,24 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <div class="home"></div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import login from '@/models/login'
 export default {
   name: 'home',
-  components: {
-    HelloWorld
+  mounted () {
+    this.checkLogin()
+  },
+  methods: {
+    checkLogin () {
+      // 检查本地是否存在token的保存
+      login.isLogin().then(res => {
+        res ? this.jumpTo('/dashboard') : this.jumpTo('/login')
+      })
+    },
+    jumpTo (uri) {
+      this.$router.replace(uri)
+    }
   }
 }
 </script>
