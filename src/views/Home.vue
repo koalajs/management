@@ -1,19 +1,24 @@
 <template>
-  <div class="home">
-    <login
-      msg="Login Form"
-    ></login>
-  </div>
+  <div class="home"></div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Login from '@/components/Login.vue'
-
+import login from '@/models/login'
 export default {
   name: 'home',
-  components: {
-    Login
+  mounted () {
+    this.checkLogin()
+  },
+  methods: {
+    checkLogin () {
+      // 检查本地是否存在token的保存
+      login.isLogin().then(res => {
+        res ? this.jumpTo('/dashboard') : this.jumpTo('/login')
+      })
+    },
+    jumpTo (uri) {
+      this.$router.replace(uri)
+    }
   }
 }
 </script>
