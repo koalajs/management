@@ -15,6 +15,7 @@ export default {
           message: '成功退出系统',
           type: 'success'
         })
+        // 该处理的其他数据在这里处理。
         this.$router.replace('/')
       }).catch(e => {
         this.$message({

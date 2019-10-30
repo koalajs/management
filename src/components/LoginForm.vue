@@ -51,8 +51,8 @@ export default {
   data () {
     return {
       loginData: {
-        username: '',
-        password: ''
+        username: 'choufeng',
+        password: '123'
       },
       isRequesting: false
     }
@@ -64,7 +64,6 @@ export default {
   },
   methods: {
     setIsRequest (b) {
-      console.log('???', b)
       this.isRequesting = b
     },
     checkData (data) {
@@ -76,6 +75,17 @@ export default {
       console.log('show result', result)
       return reduce((a, v) => v.hasError ? reduced(v) : v, {}, values(result))
     },
+    getData (data) {
+      return {
+        ad_domain: 'WP',
+        ip: '12.12.12.12',
+        local_machine: 'pc',
+        password: data.password,
+        platform: 'PAD',
+        property: 'WP',
+        userdn: data.username
+      }
+    },
     doLogin () {
       const result = this.checkData(this.loginData)
       if (result.hasError) {
@@ -85,14 +95,17 @@ export default {
         })
       } else {
         this.setIsRequest(true)
-        login.login(this.loginData).then(res => {
-          this.$message({
-            message: result.errorMessage,
-            type: 'success'
-          })
-          this.setIsRequest(false)
-          this.jumpTo('/dashboard')
-        })
+        login.login(this.getData(this.loginData))
+        // login.login(this.loginData).then(res => {
+        //   this.$message({
+        //     message: result.errorMessage,
+        //     type: 'success'
+        //   })
+        //   this.setIsRequest(false)
+        //   this.jumpTo('/dashboard')
+        // }).catch(e => {
+        //   console.log('show api error', e)
+        // })
       }
     },
     jumpTo (uri) {

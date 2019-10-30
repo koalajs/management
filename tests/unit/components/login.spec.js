@@ -5,4 +5,7 @@ const localVue = createLocalVue()
 localVue.use(ElementUI)
 
 describe('HelloWorld.vue', () => {
+  it('', () => {
+    expect(1).toBe(1)
+  })
 })

@@ -1,10 +1,10 @@
-import localForage from 'localforage'
+import local from '@/plugins/local'
 import { TOKEN_KEY } from '../common/consts.js'
 import api from '@/plugins/api'
 export default {
   isLogin () {
     return new Promise((resolve, reject) => {
-      localForage.getItem(TOKEN_KEY).then(res => {
+      local.getItem(TOKEN_KEY).then(res => {
         if (res === null) {
           resolve(false)
         }
@@ -16,7 +16,7 @@ export default {
   },
   setToken (token) {
     return new Promise((resolve, reject) => {
-      localForage.setItem(TOKEN_KEY, token).then(res => {
+      local.setItem(TOKEN_KEY, token).then(res => {
         resolve(true)
       }).catch(e => {
         reject(e)
@@ -25,7 +25,7 @@ export default {
   },
   getToken () {
     return new Promise((resolve, reject) => {
-      localForage.getItem(TOKEN_KEY).then(res => {
+      local.getItem(TOKEN_KEY).then(res => {
         resolve(res)
       }).catch(e => {
         reject(e)
@@ -33,18 +33,16 @@ export default {
     })
   },
   login (data) {
-    return new Promise((resolve, reject) => {
-      // 在这里进行axios操作
-      api.get('auth').then(res => {
-        resolve(true)
-      }).catch(e => {
-        reject(e)
-      })
+    api.post('authorize', data).then(res => {
+      return res
+    }).catch(e => {
+      console.log('authorize error', e)
+      return e
     })
   },
   logout () {
     return new Promise((resolve, reject) => {
-      localForage.removeItem(TOKEN_KEY).then(res => {
+      local.removeItem(TOKEN_KEY).then(res => {
         resolve(true)
       }).catch(e => {
         reject(e)
