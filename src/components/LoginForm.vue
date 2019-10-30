@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import login from '@/models/login'
+import loginModel from '@/models/login'
 import { SchemaModel, StringType } from 'schema-typed'
 import { reduce, reduced, values } from 'ramda'
 export default {
@@ -51,7 +51,7 @@ export default {
   data () {
     return {
       loginData: {
-        username: 'choufeng',
+        username: 'tenfold',
         password: '123'
       },
       isRequesting: false
@@ -95,17 +95,20 @@ export default {
         })
       } else {
         this.setIsRequest(true)
-        login.login(this.getData(this.loginData))
-        // login.login(this.loginData).then(res => {
-        //   this.$message({
-        //     message: result.errorMessage,
-        //     type: 'success'
-        //   })
-        //   this.setIsRequest(false)
-        //   this.jumpTo('/dashboard')
-        // }).catch(e => {
-        //   console.log('show api error', e)
-        // })
+        loginModel.login(this.getData(this.loginData)).then(res => {
+          this.$message({
+            message: this.$t('login.login_success'),
+            type: 'success'
+          })
+          this.setIsRequest(false)
+          this.jumpTo('/dashboard')
+        }).catch(e => {
+          this.setIsRequest(false)
+          this.$message({
+            message: this.$t('login.login_failed'),
+            type: 'error'
+          })
+        })
       }
     },
     jumpTo (uri) {

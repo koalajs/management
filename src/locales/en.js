@@ -7,5 +7,7 @@ export const login = {
   password: 'Password',
   login_btn: 'Login',
   need_username: 'Username is required!',
-  need_password: 'Password is required!'
+  need_password: 'Password is required!',
+  login_success: 'Login successful!',
+  login_failed: 'Login failed!'
 }

@@ -32,12 +32,13 @@ export default {
       })
     })
   },
-  login (data) {
-    api.post('authorize', data).then(res => {
-      return res
-    }).catch(e => {
-      console.log('authorize error', e)
-      return e
+  async login (data) {
+    return new Promise((resolve, reject) => {
+      api.post('authorize', data).then(res => {
+        resolve(res.data.data)
+      }).catch(e => {
+        reject(e)
+      })
     })
   },
   logout () {

@@ -11,7 +11,7 @@ api.setBaseURL = function (url) {
   this.defaults.baseURL = url
 }
 
-api.setToken = function (token) {
+api.setToken = function () {
   local.getItem(TOKEN_KEY).then(res => {
     if (res) {
       this.defaults.headers.common['Authorization'] = res
