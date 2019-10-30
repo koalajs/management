@@ -60,6 +60,7 @@ export default {
   position absolute
   top 2rem
   right 2rem
+  max-height 20rem
 .el-select
   width 8rem
 </style>

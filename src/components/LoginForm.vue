@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import login from '@/models/login'
+import loginModel from '@/models/login'
 import { SchemaModel, StringType } from 'schema-typed'
 import { reduce, reduced, values } from 'ramda'
 export default {
@@ -51,8 +51,8 @@ export default {
   data () {
     return {
       loginData: {
-        username: '',
-        password: ''
+        username: 'tenfold',
+        password: '123'
       },
       isRequesting: false
     }
@@ -64,7 +64,6 @@ export default {
   },
   methods: {
     setIsRequest (b) {
-      console.log('???', b)
       this.isRequesting = b
     },
     checkData (data) {
@@ -76,6 +75,17 @@ export default {
       console.log('show result', result)
       return reduce((a, v) => v.hasError ? reduced(v) : v, {}, values(result))
     },
+    getData (data) {
+      return {
+        ad_domain: 'WP',
+        ip: '12.12.12.12',
+        local_machine: 'pc',
+        password: data.password,
+        platform: 'PAD',
+        property: 'WP',
+        userdn: data.username
+      }
+    },
     doLogin () {
       const result = this.checkData(this.loginData)
       if (result.hasError) {
@@ -85,13 +95,19 @@ export default {
         })
       } else {
         this.setIsRequest(true)
-        login.login(this.loginData).then(res => {
+        loginModel.login(this.getData(this.loginData)).then(res => {
           this.$message({
-            message: result.errorMessage,
+            message: this.$t('login.login_success'),
             type: 'success'
           })
           this.setIsRequest(false)
           this.jumpTo('/dashboard')
+        }).catch(e => {
+          this.setIsRequest(false)
+          this.$message({
+            message: this.$t('login.login_failed'),
+            type: 'error'
+          })
         })
       }
     },

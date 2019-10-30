@@ -1,6 +1,5 @@
 import login from '@/models/login.js'
 
-
 describe('models/login.js', () => {
   it('test isLogin can return a boolean', async () => {
     const d1 = await login.isLogin()
