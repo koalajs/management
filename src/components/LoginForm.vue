@@ -101,7 +101,7 @@ export default {
             type: 'success'
           })
           this.setIsRequest(false)
-          this.jumpTo('/dashboard')
+          this.jumpTo('/cms/dashboard')
         }).catch(e => {
           this.setIsRequest(false)
           this.$message({

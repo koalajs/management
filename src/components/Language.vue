@@ -58,8 +58,8 @@ export default {
 <style lang="stylus" scoped>
 .language
   position absolute
-  top 2rem
-  right 2rem
+  top 0.6rem
+  right 4rem
   max-height 20rem
 .el-select
   width 8rem

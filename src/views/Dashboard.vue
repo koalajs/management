@@ -1,23 +1,17 @@
 <template>
-  <div>
-    Dashboard <el-button type="primary" @click="$router.replace('/logout')">Logout</el-button>
-  </div>
+  <el-container>
+    <el-row>
+      <el-col :span="24">
+        <p v-for="r in 100" :key="r">fdsa</p>
+      </el-col>
+    </el-row>
+  </el-container>
 </template>
 
 <script>
-import login from '@/models/login'
 export default {
-  mounted () {
-    this.test()
-  },
-  methods: {
-    test () {
-      login.login({}).then(res => {
-        console.log('show login again')
-      }).catch(e => {
-        console.log('show login again error')
-      })
-    }
-  }
 }
 </script>
+
+<style lang="stylus" scoped>
+</style>
