@@ -43,39 +43,28 @@
 import loginModel from '@/models/login'
 import { SchemaModel, StringType } from 'schema-typed'
 import { reduce, reduced, values } from 'ramda'
+import { ref, reactive, computed } from '@vue/composition-api'
 export default {
   name: 'LoginForm',
-  props: {
-    title: String
-  },
-  data () {
-    return {
-      loginData: {
-        username: 'tenfold',
-        password: '123'
-      },
-      isRequesting: false
-    }
-  },
-  computed: {
-    btnLoginStatus: function () {
-      return this.isRequesting
-    }
-  },
-  methods: {
-    setIsRequest (b) {
-      this.isRequesting = b
-    },
-    checkData (data) {
+  setup (props, { root }) {
+    const loginData = reactive({
+      username: 'tenfold',
+      password: '123'
+    })
+    const isRequesting = ref(false)
+    const btnLoginStatus = computed(() => {
+      return isRequesting.value
+    })
+    const setIsRequest = (b) => (isRequesting.value = b)
+    const checkData = (data) => {
       const mod = SchemaModel({
-        username: StringType().isRequired(this.$t('login.need_username')),
-        password: StringType().isRequired(this.$t('login.need_password'))
+        username: StringType().isRequired(root.$t('login.need_username')),
+        password: StringType().isRequired(root.$t('login.need_password'))
       })
       const result = mod.check(data)
-      console.log('show result', result)
       return reduce((a, v) => v.hasError ? reduced(v) : v, {}, values(result))
-    },
-    getData (data) {
+    }
+    const getData = (data) => {
       return {
         ad_domain: 'WP',
         ip: '12.12.12.12',
@@ -85,34 +74,43 @@ export default {
         property: 'WP',
         userdn: data.username
       }
-    },
-    doLogin () {
-      const result = this.checkData(this.loginData)
+    }
+    const doLogin = () => {
+      const result = checkData(loginData)
       if (result.hasError) {
-        this.$message({
+        root.$message({
           message: result.errorMessage,
           type: 'error'
         })
       } else {
-        this.setIsRequest(true)
-        loginModel.login(this.getData(this.loginData)).then(res => {
-          this.$message({
-            message: this.$t('login.login_success'),
+        setIsRequest(true)
+        loginModel.login(getData(loginData)).then(res => {
+          root.$message({
+            message: root.$t('login.login_success'),
             type: 'success'
           })
-          this.setIsRequest(false)
-          this.jumpTo('/cms/dashboard')
+          setIsRequest(false)
+          jumpTo('/cms/dashboard')
         }).catch(e => {
-          this.setIsRequest(false)
-          this.$message({
-            message: this.$t('login.login_failed'),
+          setIsRequest(false)
+          root.$message({
+            message: root.$t('login.login_failed'),
             type: 'error'
           })
         })
       }
-    },
-    jumpTo (uri) {
-      this.$router.replace(uri)
+    }
+    const jumpTo = (uri) => {
+      root.$router.replace(uri)
+    }
+    return {
+      loginData,
+      isRequesting,
+      btnLoginStatus,
+      setIsRequest,
+      checkData,
+      getData,
+      doLogin
     }
   }
 }
