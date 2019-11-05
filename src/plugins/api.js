@@ -1,6 +1,6 @@
 import axios from 'axios'
 import local from '@/plugins/local'
-import config from '@/config'
+import config from '@/config/urlConfig'
 import { TOKEN_KEY } from '@/common/consts'
 
 let api = axios.create({
@@ -18,6 +18,13 @@ api.setToken = function () {
     }
   })
 }
+
+// api.interceptors.request.use((config) => {
+//   console.log('show api interceptors', config)
+//   return config
+// }, (err) => {
+//   console.log('show api interceptors error', err)
+// })
 
 const setup = function (api) {
   api.setToken()

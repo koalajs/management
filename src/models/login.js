@@ -32,7 +32,7 @@ export default {
       })
     })
   },
-  async login (data) {
+  login (data) {
     return new Promise((resolve, reject) => {
       api.post('authorize', data).then(res => {
         resolve(res.data.data)
