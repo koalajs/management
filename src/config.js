@@ -1,3 +1,3 @@
 export default {
-  apiURL: 'http://119.23.148.77:8080/api'
+  apiURL: 'https://www.easy-mock.com/mock/5dc00db343ff8e61fd932a4a/koalajs'
 }

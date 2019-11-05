@@ -6,7 +6,6 @@
       </el-col>
       <el-col :span="24">
         <el-menu
-          class="el-menu"
           default-active="1"
           background-color="#661a1a"
           text-color="#fff"
@@ -38,7 +37,7 @@
 </template>
 
 <script>
-import menuConfig from '@/menuConfig'
+import menuConfig from '@/config/menuConfig'
 import { has, propOr } from 'ramda'
 import local from '@/plugins/local'
 import { ROLES_KEY } from '@/common/consts'
@@ -93,14 +92,19 @@ export default {
 
 <style lang="stylus" scoped>
 .menu
+  border 0
   .logo
     height 15rem
     width 14rem
     border 0
   .el-menu
-    border-top 1px solid #FFF
+    border 0
+    border-top 1px solid #ecebe3
+    padding-top 2rem
     width auto
     text-align left
+    .is-active
+      font-size 1.2rem
   .el-menu-item-group
     color #FFF
   .el-menu-item

@@ -19,37 +19,19 @@
 </template>
 
 <script>
-// import { clone } from 'ramda'
+import { ref, computed } from '@vue/composition-api'
+import language from '@/config/languageConfig'
 export default {
-  data () {
+  setup (props, { root }) {
+    const options = ref(language)
+    const lang = computed(() => root.$i18n.locale)
+    const setLanguage = (l) => root.$i18n.setLocale(l)
+    const onChangeLanguge = (e) => setLanguage(e)
     return {
-      options: [
-        {
-          value: 'zh_cn',
-          label: '简体中文'
-        },
-        {
-          value: 'zh_tw',
-          label: '繁体中文'
-        },
-        {
-          value: 'en',
-          label: 'Englist'
-        }
-      ]
-    }
-  },
-  computed: {
-    lang: function () {
-      return this.$i18n.locale
-    }
-  },
-  methods: {
-    setLanguage (l) {
-      this.$i18n.setLocale(l)
-    },
-    onChangeLanguge (e) {
-      this.setLanguage(e)
+      options,
+      lang,
+      setLanguage,
+      onChangeLanguge
     }
   }
 }
