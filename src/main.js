@@ -9,6 +9,10 @@ import ElementUI from 'element-ui'
 import i18n from './plugins/i18n'
 import VueCompositionApi from '@vue/composition-api'
 
+// 用于Mock API数据， 非测试应去除。
+import Mock from '@/mock'
+Mock.setup()
+
 Vue.use(VueCompositionApi)
 Vue.use(ElementUI)
 
