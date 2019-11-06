@@ -12,15 +12,18 @@
           active-text-color="#ffd04b"
         >
           <template v-for="(r) in list">
+            <template v-if="hasRole(r)">
             <el-submenu v-if="hasChildren(r)" :key="getRowID(r)" :index="getRowID(r)">
               <template slot="title">
                 <i :class="getIcon(r)"></i>
                 <span>{{getTitle(r)}}</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item v-for="(rr) in getChildren(r)" :key="getRowID(rr)" :index="getRowID(rr)">
-                  {{getTitle(rr)}}
-                </el-menu-item>
+                <template v-for="rr in getChildren(r)">
+                  <el-menu-item v-if="hasRole(rr)" :key="getRowID(rr)" :index="getRowID(rr)">
+                    {{getTitle(rr)}}
+                  </el-menu-item>
+                </template>
               </el-menu-item-group>
             </el-submenu>
             <el-menu-item v-else :key="getRowID(r)" :index="getRowID(r)" @click="openURI(getURI(r))">
@@ -29,6 +32,7 @@
                 <span>{{getTitle(r)}}</span>
               </template>
             </el-menu-item>
+            </template>
           </template>
         </el-menu>
       </el-col>
@@ -38,22 +42,25 @@
 
 <script>
 import menuConfig from '@/config/menuConfig'
-import { has, propOr } from 'ramda'
+import { has, propOr, union } from 'ramda'
 import local from '@/plugins/local'
 import { ROLES_KEY } from '@/common/consts'
-import { computed, reactive } from '@vue/composition-api'
+import { ref, reactive, onMounted } from '@vue/composition-api'
 
 export default {
   setup (props, { root }) {
     const list = reactive(menuConfig)
-    const roles = computed(() => {
+    const basicMenu = reactive(['cms.dashboard', 'cms.logout'])
+    const roles = ref([])
+    onMounted(() => {
       local.getItem(ROLES_KEY).then(res => {
-        return res
-      }).catch(() => {
-        return []
+        roles.value = addBasicRoles(res)
+      }).catch(e => {
+        roles.value = []
       })
     })
-    const hasRole = row => roles.includes(getRole(row))
+    const addBasicRoles = list => union(list, basicMenu)
+    const hasRole = row => roles.value.includes(getRole(row))
     const getRole = row => propOr('', 'role', row)
     const hasChildren = row => has('children', row)
     const getChildren = row => propOr([], 'children', row)

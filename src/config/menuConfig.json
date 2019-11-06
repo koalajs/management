@@ -4,7 +4,7 @@
     "title": "menu.dashboard",
     "icon": "el-icon-s-home",
     "uri": "/cms/dashboard",
-    "role": "cms"
+    "role": "cms.dashboard"
   },
   {
     "id": "2",
@@ -39,6 +39,6 @@
     "title": "menu.logout",
     "icon": "el-icon-s-promotion",
     "uri": "/logout",
-    "role": "cms"
+    "role": "cms.logout"
   }
 ]

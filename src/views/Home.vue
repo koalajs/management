@@ -3,22 +3,17 @@
 </template>
 
 <script>
-import login from '@/models/login'
+import loginModel from '@/models/login'
+import { onMounted } from '@vue/composition-api'
 export default {
   name: 'home',
-  mounted () {
-    this.checkLogin()
-  },
-  methods: {
-    checkLogin () {
-      // 检查本地是否存在token的保存
-      login.isLogin().then(res => {
-        res ? this.jumpTo('/dashboard') : this.jumpTo('/login')
-      })
-    },
-    jumpTo (uri) {
-      this.$router.replace(uri)
+  setup (props, { root }) {
+    const jumpTo = uri => root.$router.replace(uri)
+    const checkLogin = async () => {
+      const res = await loginModel.isLogin()
+      res ? jumpTo('/dashboard') : jumpTo('/login')
     }
+    onMounted(checkLogin())
   }
 }
 </script>

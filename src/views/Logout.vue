@@ -3,27 +3,17 @@
 </template>
 
 <script>
-import login from '@/models/login'
+import loginModel from '@/models/login'
+import { onMounted } from '@vue/composition-api'
+
 export default {
-  mounted () {
-    this.doLogout()
-  },
-  methods: {
-    doLogout () {
-      login.logout().then(res => {
-        this.$message({
-          message: '成功退出系统',
-          type: 'success'
-        })
-        // 该处理的其他数据在这里处理。
-        this.$router.replace('/')
-      }).catch(e => {
-        this.$message({
-          message: '退出系统出现错误',
-          type: 'error'
-        })
-      })
+  setup (props, { root }) {
+    const doLogout = () => {
+      loginModel.logout()
+      // TODO 该行会导致一个handler.call is not a function的问题.
+      root.$router.replace('/')
     }
+    onMounted(doLogout())
   }
 }
 </script>

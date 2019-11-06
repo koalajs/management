@@ -6,7 +6,8 @@ export default (config) => {
     Mockjs.mock({
       status: 'success',
       data: {
-        token: '@string(67)'
+        token: '@string(67)',
+        roles: ['cms.system', 'cms.admin', 'cms.admin.add', 'cms.admin.list']
       }
     })
   ]

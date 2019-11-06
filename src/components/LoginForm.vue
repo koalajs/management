@@ -42,7 +42,7 @@
 <script>
 import loginModel from '@/models/login'
 import { SchemaModel, StringType } from 'schema-typed'
-import { reduce, reduced, values } from 'ramda'
+import { reduce, reduced, values, propOr } from 'ramda'
 import { ref, reactive, computed } from '@vue/composition-api'
 export default {
   name: 'LoginForm',
@@ -75,9 +75,8 @@ export default {
         userdn: data.username
       }
     }
-    const getToken = (res) => {
-      return res.data.data.token
-    }
+    const getToken = res => propOr([], 'token', res.data.data)
+    const getRoles = res => propOr([], 'roles', res.data.data)
     const doLogin = () => {
       const result = checkData(loginData)
       if (result.hasError) {
@@ -87,12 +86,13 @@ export default {
         })
       } else {
         setIsRequest(true)
-        loginModel.login(getData(loginData)).then(res => {
+        loginModel.login(getData(loginData)).then(async res => {
           root.$message({
             message: root.$t('login.login_success'),
             type: 'success'
           })
-          loginModel.setToken(getToken(res))
+          await loginModel.setToken(getToken(res))
+          await loginModel.setRoles(getRoles(res))
           setIsRequest(false)
           jumpTo('/cms/dashboard')
         }).catch(e => {
