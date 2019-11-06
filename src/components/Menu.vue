@@ -41,50 +41,39 @@ import menuConfig from '@/config/menuConfig'
 import { has, propOr } from 'ramda'
 import local from '@/plugins/local'
 import { ROLES_KEY } from '@/common/consts'
+import { computed, reactive } from '@vue/composition-api'
+
 export default {
-  computed: {
-    list: function () {
-      return menuConfig
-    }
-  },
-  data () {
+  setup (props, { root }) {
+    const list = reactive(menuConfig)
+    const roles = computed(() => {
+      local.getItem(ROLES_KEY).then(res => {
+        return res
+      }).catch(() => {
+        return []
+      })
+    })
+    const hasRole = row => roles.includes(getRole(row))
+    const getRole = row => propOr('', 'role', row)
+    const hasChildren = row => has('children', row)
+    const getChildren = row => propOr([], 'children', row)
+    const getRowID = row => row.id
+    const getTitle = row => root.$t(row.title)
+    const getIcon = row => row.icon
+    const getURI = row => row.uri
+    const openURI = uri => root.$router.push(uri)
     return {
-      get roles () {
-        local.getItem(ROLES_KEY).then(res => {
-          return res
-        }).catch(e => {
-          return []
-        })
-      }
-    }
-  },
-  methods: {
-    hasRole (row) {
-      return this.roles.includes(this.getRole(row))
-    },
-    hasChildren (row) {
-      return has('children', row)
-    },
-    getChildren (row) {
-      return propOr([], 'children', row)
-    },
-    getRowID (row) {
-      return row.id
-    },
-    getTitle (row) {
-      return this.$t(row.title)
-    },
-    getIcon (row) {
-      return row.icon
-    },
-    getRole (row) {
-      return propOr('', 'role', row)
-    },
-    getURI (row) {
-      return row.uri
-    },
-    openURI (uri) {
-      this.$router.push(uri)
+      list,
+      roles,
+      hasRole,
+      getRole,
+      hasChildren,
+      getChildren,
+      getRowID,
+      getTitle,
+      getIcon,
+      getURI,
+      openURI
     }
   }
 }
