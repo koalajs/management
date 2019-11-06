@@ -22,7 +22,6 @@ export default {
           message: '退出系统出现错误',
           type: 'error'
         })
-        console.log('logout error:', e)
       })
     }
   }

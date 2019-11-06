@@ -1,6 +1,7 @@
 import local from '@/plugins/local'
 import { TOKEN_KEY } from '../common/consts.js'
 import api from '@/plugins/api'
+
 export default {
   isLogin () {
     return new Promise((resolve, reject) => {
@@ -35,7 +36,7 @@ export default {
   login (data) {
     return new Promise((resolve, reject) => {
       api.post('authorize', data).then(res => {
-        resolve(res.data.data)
+        resolve(res)
       }).catch(e => {
         reject(e)
       })

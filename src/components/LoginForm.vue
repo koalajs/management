@@ -75,6 +75,9 @@ export default {
         userdn: data.username
       }
     }
+    const getToken = (res) => {
+      return res.data.data.token
+    }
     const doLogin = () => {
       const result = checkData(loginData)
       if (result.hasError) {
@@ -89,6 +92,7 @@ export default {
             message: root.$t('login.login_success'),
             type: 'success'
           })
+          loginModel.setToken(getToken(res))
           setIsRequest(false)
           jumpTo('/cms/dashboard')
         }).catch(e => {
