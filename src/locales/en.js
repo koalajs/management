@@ -11,3 +11,12 @@ export const login = {
   login_success: 'Login successful!',
   login_failed: 'Login failed!'
 }
+
+export const menu = {
+  dashboard: 'Dashboard',
+  system: 'System',
+  admin: 'Admin',
+  admin_add: 'Add Admin',
+  admin_list: 'Admin List',
+  logout: 'Logout'
+}

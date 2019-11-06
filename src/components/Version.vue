@@ -1,15 +1,17 @@
 <template>
   <div class="version">
-    Version: {{version}}
+    Version: {{v}}
   </div>
 </template>
 
 <script>
 import { version } from '../../package.json'
+import { computed } from '@vue/composition-api'
 export default {
-  computed: {
-    version: function () {
-      return version
+  setup () {
+    const v = computed(() => version)
+    return {
+      v
     }
   }
 }

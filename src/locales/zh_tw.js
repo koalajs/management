@@ -11,3 +11,12 @@ export const login = {
   login_success: '登入成功',
   login_failed: '登入失敗'
 }
+
+export const menu = {
+  dashboard: '控制臺',
+  system: '系統管理',
+  admin: '管理員',
+  admin_add: '添加管理員',
+  admin_list: '管理員列表',
+  logout: '退出系統'
+}

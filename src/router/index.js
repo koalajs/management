@@ -29,9 +29,26 @@ const routes = [
     component: () => import('../views/Logout.vue')
   },
   {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: () => import('../views/Dashboard.vue')
+    path: '/cms',
+    name: 'cms',
+    component: () => import('../layout/Cms.vue'),
+    children: [
+      {
+        path: 'dashboard',
+        name: 'dashboard',
+        component: () => import('../views/Dashboard.vue')
+      },
+      {
+        path: 'system',
+        name: 'system',
+        component: () => import('../views/Dashboard.vue')
+      },
+      {
+        path: 'admin',
+        name: 'admin',
+        component: () => import('../views/Dashboard.vue')
+      }
+    ]
   }
 ]
 

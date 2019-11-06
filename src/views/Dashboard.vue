@@ -1,23 +1,29 @@
 <template>
-  <div>
-    Dashboard <el-button type="primary" @click="$router.replace('/logout')">Logout</el-button>
-  </div>
+  <el-container class="dashboard">
+    <el-row class="row-body">
+      <el-col :span="24" class="k-bg-purple-dark">
+        <panel-box>
+          <div slot="header-left">Dashboard</div>
+          <p>ceshi</p>
+        </panel-box>
+      </el-col>
+    </el-row>
+  </el-container>
 </template>
 
 <script>
-import login from '@/models/login'
+import PanelBox from '@/components/PanelBox'
 export default {
-  mounted () {
-    this.test()
-  },
-  methods: {
-    test () {
-      login.login({}).then(res => {
-        console.log('show login again')
-      }).catch(e => {
-        console.log('show login again error')
-      })
-    }
+  components: {
+    PanelBox
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.dashboard
+  padding 0
+  border 1px solid yellow
+  .row-body
+    border 1px solid red
+</style>
