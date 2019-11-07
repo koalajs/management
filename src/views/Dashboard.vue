@@ -15,9 +15,15 @@
 
 <script>
 import PanelBox from '@/components/PanelBox'
+import { onMounted } from '@vue/composition-api'
 export default {
   components: {
     PanelBox
+  },
+  setup (props, { root }) {
+    onMounted(() => {
+      document.title = root.$t('dashboard.title')
+    })
   }
 }
 </script>
