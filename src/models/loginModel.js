@@ -9,7 +9,7 @@ export default {
     return token !== null
   },
   diffTime (t, l) {
-    return (l + t * 1 * 1000) < new Date().getTime()
+    return (l + t * 60 * 1000) < new Date().getTime()
   },
   async checkTimeout () {
     const token = await local.getItem(TOKEN_KEY)

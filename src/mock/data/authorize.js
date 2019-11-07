@@ -8,7 +8,7 @@ export default (config) => {
       data: {
         token: '@string(67)',
         roles: ['cms.system', 'cms.admin', 'cms.admin.add', 'cms.admin.list'],
-        timeout: 10
+        timeout: 30
       }
     })
   ]
