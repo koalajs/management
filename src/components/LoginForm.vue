@@ -40,10 +40,11 @@
 </template>
 
 <script>
-import loginModel from '@/models/login'
+import loginModel from '@/models/loginModel'
 import { SchemaModel, StringType } from 'schema-typed'
 import { reduce, reduced, values, propOr } from 'ramda'
 import { ref, reactive, computed } from '@vue/composition-api'
+import { CMS_DASHBOARD } from '@/common/routers'
 export default {
   name: 'LoginForm',
   setup (props, { root }) {
@@ -77,6 +78,7 @@ export default {
     }
     const getToken = res => propOr([], 'token', res.data.data)
     const getRoles = res => propOr([], 'roles', res.data.data)
+    const getTimeout = res => propOr(30, 'timeout', res.data.data)
     const doLogin = () => {
       const result = checkData(loginData)
       if (result.hasError) {
@@ -93,8 +95,10 @@ export default {
           })
           await loginModel.setToken(getToken(res))
           await loginModel.setRoles(getRoles(res))
+          await loginModel.setTimeout(getTimeout(res))
+          await loginModel.setLastActive()
           setIsRequest(false)
-          jumpTo('/cms/dashboard')
+          jumpTo(CMS_DASHBOARD)
         }).catch(e => {
           setIsRequest(false)
           root.$message({
