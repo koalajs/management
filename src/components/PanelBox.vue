@@ -1,10 +1,13 @@
 <template>
   <div class="panel-box">
     <el-row class="header">
-      <el-col :span="12">
+      <el-col :span="8">
         <slot name="header-left" />
       </el-col>
-      <el-col :span="12">
+      <el-col :span="8">
+        <slot name="header-center" />
+      </el-col>
+      <el-col :span="8">
         <slot name="header-right" />
       </el-col>
     </el-row>

@@ -22,3 +22,13 @@ export const menu = {
   admin_list: '管理员列表',
   logout: '退出系统'
 }
+
+export const dashboard = {
+  title: '控制台面板'
+}
+
+export const common = {
+  btn_cancel: '取消',
+  btn_sure: '确定',
+  delete_message: '提醒： 您确定要删除这条记录么？'
+}

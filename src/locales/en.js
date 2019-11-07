@@ -22,3 +22,13 @@ export const menu = {
   admin_list: 'Admin List',
   logout: 'Logout'
 }
+
+export const dashboard = {
+  title: 'Dashboard'
+}
+
+export const common = {
+  btn_cancel: 'Cancel',
+  btn_sure: 'Sure',
+  delete_message: 'Warning: Are you sure you want to delete this item?'
+}

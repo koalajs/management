@@ -14,11 +14,17 @@
 import LoginForm from '@/components/LoginForm'
 import Language from '@/components/Language'
 import Version from '@/components/Version'
+import { onMounted } from '@vue/composition-api'
 export default {
   components: {
     LoginForm,
     Language,
     Version
+  },
+  setup (props, { root }) {
+    onMounted(() => {
+      document.title = root.$t('main.title')
+    })
   }
 }
 </script>

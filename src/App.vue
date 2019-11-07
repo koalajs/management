@@ -30,7 +30,7 @@ export default {
         }
       }, 5000)
     })
-    const doClick = (e) => console.log('do click', e)
+    const doClick = (e) => loginModel.setLastActive()
     return {
       doClick
     }
