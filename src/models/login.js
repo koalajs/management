@@ -1,54 +1,31 @@
 import local from '@/plugins/local'
-import { TOKEN_KEY } from '../common/consts.js'
+import { TOKEN_KEY, ROLES_KEY } from '../common/consts.js'
 import api from '@/plugins/api'
 
+const _setItem = (k, v) => local.setItem(k, v)
+const _getItem = k => local.getItem(k)
+const _removeItem = k => local.removeItem(k)
+
 export default {
-  isLogin () {
-    return new Promise((resolve, reject) => {
-      local.getItem(TOKEN_KEY).then(res => {
-        if (res === null) {
-          resolve(false)
-        }
-        resolve(true)
-      }).catch(e => {
-        reject(e)
-      })
-    })
+  async isLogin () {
+    const token = await _getItem(TOKEN_KEY)
+    return token !== null
   },
   setToken (token) {
-    return new Promise((resolve, reject) => {
-      local.setItem(TOKEN_KEY, token).then(res => {
-        resolve(true)
-      }).catch(e => {
-        reject(e)
-      })
-    })
+    return _setItem(TOKEN_KEY, token)
   },
   getToken () {
-    return new Promise((resolve, reject) => {
-      local.getItem(TOKEN_KEY).then(res => {
-        resolve(res)
-      }).catch(e => {
-        reject(e)
-      })
-    })
+    return _getItem(TOKEN_KEY)
+  },
+  setRoles (list) {
+    return _setItem(ROLES_KEY, list)
   },
   login (data) {
-    return new Promise((resolve, reject) => {
-      api.post('authorize', data).then(res => {
-        resolve(res)
-      }).catch(e => {
-        reject(e)
-      })
-    })
+    return api.post('authorize', data)
   },
-  logout () {
-    return new Promise((resolve, reject) => {
-      local.removeItem(TOKEN_KEY).then(res => {
-        resolve(true)
-      }).catch(e => {
-        reject(e)
-      })
-    })
+  async logout () {
+    await _removeItem(TOKEN_KEY)
+    await _removeItem(ROLES_KEY)
+    return true
   }
 }
