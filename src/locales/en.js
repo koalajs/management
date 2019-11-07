@@ -10,7 +10,8 @@ export const login = {
   need_password: 'Password is required!',
   login_success: 'Login successful!',
   login_failed: 'Login failed!',
-  timeout: 'System timeout, Auto Logout！'
+  timeout: 'System timeout, Auto Logout！',
+  logout: 'Logout!'
 }
 
 export const menu = {

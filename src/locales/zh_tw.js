@@ -10,7 +10,8 @@ export const login = {
   need_password: '密碼是必須的!',
   login_success: '登入成功',
   login_failed: '登入失敗',
-  timeout: '您長時間未有操作，已經自動爲您登出系統！'
+  timeout: '您長時間未有操作，已經自動爲您登出系統！',
+  logout: '已經登出系統'
 }
 
 export const menu = {
