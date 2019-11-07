@@ -9,7 +9,8 @@ export const login = {
   need_username: '用戶名是必須的!',
   need_password: '密碼是必須的!',
   login_success: '登入成功',
-  login_failed: '登入失敗'
+  login_failed: '登入失敗',
+  timeout: '您長時間未有操作，已經自動爲您登出系統！'
 }
 
 export const menu = {

@@ -96,6 +96,7 @@ export default {
           await loginModel.setToken(getToken(res))
           await loginModel.setRoles(getRoles(res))
           await loginModel.setTimeout(getTimeout(res))
+          await loginModel.setLastActive()
           setIsRequest(false)
           jumpTo(CMS_DASHBOARD)
         }).catch(e => {
