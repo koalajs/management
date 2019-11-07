@@ -7,7 +7,6 @@ Vue.use(VueI18n)
 
 const locales = {
   zh_cn: require('@/locales/zh_cn.js'),
-  zh_tw: require('@/locales/zh_tw.js'),
   en: require('@/locales/en.js')
 }
 

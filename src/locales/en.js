@@ -22,3 +22,7 @@ export const menu = {
   admin_list: 'Admin List',
   logout: 'Logout'
 }
+
+export const dashboard = {
+  title: 'Dashboard'
+}

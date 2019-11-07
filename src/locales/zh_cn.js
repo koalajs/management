@@ -22,3 +22,7 @@ export const menu = {
   admin_list: '管理员列表',
   logout: '退出系统'
 }
+
+export const dashboard = {
+  title: '控制台面板'
+}
