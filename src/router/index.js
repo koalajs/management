@@ -27,6 +27,38 @@ const routes = [
     path: '/logout',
     name: 'logout',
     component: () => import('../views/Logout.vue')
+  },
+  {
+    path: '/cms',
+    name: 'cms',
+    component: () => import('../layout/Cms.vue'),
+    children: [
+      {
+        path: 'dashboard',
+        name: 'dashboard',
+        component: () => import('../views/Dashboard.vue')
+      },
+      {
+        path: 'system',
+        name: 'system',
+        component: () => import('../views/Dashboard.vue')
+      },
+      {
+        path: 'admin',
+        name: 'admin',
+        component: () => import('../views/Dashboard.vue')
+      },
+      {
+        path: 'admin/add',
+        name: 'admin/add',
+        component: () => import('../views/Dashboard.vue')
+      },
+      {
+        path: 'admin/list',
+        name: 'admin/list',
+        component: () => import('../views/Dashboard.vue')
+      }
+    ]
   }
 ]
 

@@ -40,63 +40,85 @@
 </template>
 
 <script>
-import login from '@/models/login'
+import loginModel from '@/models/loginModel'
 import { SchemaModel, StringType } from 'schema-typed'
-import { reduce, reduced, values } from 'ramda'
+import { reduce, reduced, values, propOr } from 'ramda'
+import { ref, reactive, computed } from '@vue/composition-api'
+import { CMS_DASHBOARD } from '@/common/routers'
 export default {
   name: 'LoginForm',
-  props: {
-    title: String
-  },
-  data () {
-    return {
-      loginData: {
-        username: '',
-        password: ''
-      },
-      isRequesting: false
-    }
-  },
-  computed: {
-    btnLoginStatus: function () {
-      return this.isRequesting
-    }
-  },
-  methods: {
-    setIsRequest (b) {
-      console.log('???', b)
-      this.isRequesting = b
-    },
-    checkData (data) {
+  setup (props, { root }) {
+    const loginData = reactive({
+      username: 'tenfold',
+      password: '123'
+    })
+    const isRequesting = ref(false)
+    const btnLoginStatus = computed(() => {
+      return isRequesting.value
+    })
+    const setIsRequest = (b) => (isRequesting.value = b)
+    const checkData = (data) => {
       const mod = SchemaModel({
-        username: StringType().isRequired(this.$t('login.need_username')),
-        password: StringType().isRequired(this.$t('login.need_password'))
+        username: StringType().isRequired(root.$t('login.need_username')),
+        password: StringType().isRequired(root.$t('login.need_password'))
       })
       const result = mod.check(data)
-      console.log('show result', result)
       return reduce((a, v) => v.hasError ? reduced(v) : v, {}, values(result))
-    },
-    doLogin () {
-      const result = this.checkData(this.loginData)
+    }
+    const getData = (data) => {
+      return {
+        ad_domain: 'WP',
+        ip: '12.12.12.12',
+        local_machine: 'pc',
+        password: data.password,
+        platform: 'PAD',
+        property: 'WP',
+        userdn: data.username
+      }
+    }
+    const getToken = res => propOr([], 'token', res.data.data)
+    const getRoles = res => propOr([], 'roles', res.data.data)
+    const getTimeout = res => propOr(30, 'timeout', res.data.data)
+    const doLogin = () => {
+      const result = checkData(loginData)
       if (result.hasError) {
-        this.$message({
+        root.$message({
           message: result.errorMessage,
           type: 'error'
         })
       } else {
-        this.setIsRequest(true)
-        login.login(this.loginData).then(res => {
-          this.$message({
-            message: result.errorMessage,
+        setIsRequest(true)
+        loginModel.login(getData(loginData)).then(async res => {
+          root.$message({
+            message: root.$t('login.login_success'),
             type: 'success'
           })
-          this.setIsRequest(false)
-          this.jumpTo('/dashboard')
+          await loginModel.setToken(getToken(res))
+          await loginModel.setRoles(getRoles(res))
+          await loginModel.setTimeout(getTimeout(res))
+          await loginModel.setLastActive()
+          setIsRequest(false)
+          jumpTo(CMS_DASHBOARD)
+        }).catch(e => {
+          setIsRequest(false)
+          root.$message({
+            message: root.$t('login.login_failed'),
+            type: 'error'
+          })
         })
       }
-    },
-    jumpTo (uri) {
-      this.$router.replace(uri)
+    }
+    const jumpTo = (uri) => {
+      root.$router.replace(uri)
+    }
+    return {
+      loginData,
+      isRequesting,
+      btnLoginStatus,
+      setIsRequest,
+      checkData,
+      getData,
+      doLogin
     }
   }
 }
