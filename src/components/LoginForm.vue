@@ -44,6 +44,7 @@ import loginModel from '@/models/login'
 import { SchemaModel, StringType } from 'schema-typed'
 import { reduce, reduced, values, propOr } from 'ramda'
 import { ref, reactive, computed } from '@vue/composition-api'
+import { CMS_DASHBOARD } from '@/common/routers'
 export default {
   name: 'LoginForm',
   setup (props, { root }) {
@@ -94,7 +95,7 @@ export default {
           await loginModel.setToken(getToken(res))
           await loginModel.setRoles(getRoles(res))
           setIsRequest(false)
-          jumpTo('/cms/dashboard')
+          jumpTo(CMS_DASHBOARD)
         }).catch(e => {
           setIsRequest(false)
           root.$message({

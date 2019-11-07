@@ -20,7 +20,7 @@
               </template>
               <el-menu-item-group>
                 <template v-for="rr in getChildren(r)">
-                  <el-menu-item v-if="hasRole(rr)" :key="getRowID(rr)" :index="getRowID(rr)">
+                  <el-menu-item v-if="hasRole(rr)" :key="getRowID(rr)" :index="getRowID(rr)" @click="openURI(getURI(rr))">
                     {{getTitle(rr)}}
                   </el-menu-item>
                 </template>
