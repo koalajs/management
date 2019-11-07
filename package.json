@@ -1,12 +1,14 @@
 {
   "name": "koalajs.management",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:unit-w": "vue-cli-service test:unit --watchAll",
+    "jest": "jest --watchAll",
+    "up": "standard-version",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -38,6 +40,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "mockjs": "^1.1.0",
+    "standard-version": "^7.0.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
     "vue-template-compiler": "^2.6.10"
