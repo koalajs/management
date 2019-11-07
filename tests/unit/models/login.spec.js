@@ -1,6 +1,6 @@
-import login from '@/models/login.js'
+import login from '@/models/loginModel.js'
 
-describe('models/login.js', () => {
+describe('models/loginModel.js', () => {
   it('test isLogin can return a boolean', async () => {
     const d1 = await login.isLogin()
     expect(d1).toBe(false)

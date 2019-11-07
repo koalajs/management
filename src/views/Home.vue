@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import loginModel from '@/models/login'
+import loginModel from '@/models/loginModel'
 import { onMounted } from '@vue/composition-api'
 import { CMS_DASHBOARD, CMS_LOGIN } from '@/common/routers'
 export default {
