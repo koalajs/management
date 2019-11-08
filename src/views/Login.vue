@@ -1,6 +1,7 @@
 <template>
   <el-container>
     <el-aside width="25vw">
+      <img src="@/assets/logo.png" />
     </el-aside>
     <el-main>
       <login-form />
@@ -36,6 +37,8 @@ export default {
   padding 0
 .el-aside
   background-color #661a1a
+  img
+    margin-top 15rem
 .el-main
   width 75vw
   margin auto

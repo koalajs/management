@@ -20,7 +20,9 @@ export const menu = {
   admin: '管理员',
   admin_add: '添加管理员',
   admin_list: '管理员列表',
-  logout: '退出系统'
+  logout: '退出系统',
+  change_password: '修改密码',
+  profile: '个人资料'
 }
 
 export const dashboard = {

@@ -34,7 +34,7 @@ describe('models/loginModel.js', () => {
   })
   it('Function checkTimeout, when localStorage is all full, and timeout will return result true and status is is_timeout', async () => {
     login.setToken('xxx')
-    login.setLastActive(new Date().getTime() - 1000*60*2)
+    login.setLastActive(new Date().getTime() - 1000 * 60 * 2)
     login.setTimeout(1)
     const res = await login.checkTimeout()
     const diffData = {
