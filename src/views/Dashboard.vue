@@ -15,15 +15,9 @@
 
 <script>
 import PanelBox from '@/components/PanelBox'
-import { onMounted } from '@vue/composition-api'
 export default {
   components: {
     PanelBox
-  },
-  setup (props, { root }) {
-    onMounted(() => {
-      document.title = root.$t('dashboard.title')
-    })
   }
 }
 </script>
@@ -31,10 +25,6 @@ export default {
 <style lang="stylus" scoped>
 .dashboard
   padding 0
-  .dashboard-title
-    line-height 2rem
-    max-height 2rem
-    text-align left
   .dashboard-body
     min-height 78vh
 </style>

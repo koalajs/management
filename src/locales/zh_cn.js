@@ -34,3 +34,9 @@ export const common = {
   btn_sure: '确定',
   delete_message: '提醒： 您确定要删除这条记录么？'
 }
+
+export const btn = {
+  edit: '编辑',
+  delete: '删除',
+  add: '新建'
+}

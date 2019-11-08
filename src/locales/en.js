@@ -34,3 +34,9 @@ export const common = {
   btn_sure: 'Sure',
   delete_message: 'Warning: Are you sure you want to delete this item?'
 }
+
+export const btn = {
+  edit: 'Edit',
+  delete: 'Delete',
+  add: 'Create'
+}

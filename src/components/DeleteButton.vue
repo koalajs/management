@@ -1,35 +1,21 @@
 <template>
-  <div>
-    <el-popover
-      placement="top"
-      width="300"
-      v-model="visible"
-    >
-      <p>{{$t('common.delete_message')}}</p>
-      <div class="popover-action">
-        <el-button
-          size="mini"
-          type="text"
-          @click="doCancel"
-        >{{$t('common.btn_cancel')}}</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="doSubmit"
-        >{{$t('common.btn_sure')}}</el-button>
-      </div>
-      <el-button
-        slot="reference"
-        type="danger"
-        icon="el-icon-delete"
-        :size="size"
-        :round="round"
-        plain
-        :loading="loading"
-        :disabled="disabled"
-      ></el-button>
-    </el-popover>
-  </div>
+  <el-popover placement="top" width="300" v-model="visible">
+    <p>{{$t('common.delete_message')}}</p>
+    <div class="popover-action">
+      <el-button size="mini" type="text" @click="doCancel">{{$t('common.btn_cancel')}}</el-button>
+      <el-button size="mini" type="danger" @click="doSubmit">{{$t('common.btn_sure')}}</el-button>
+    </div>
+    <el-button
+      slot="reference"
+      type="danger"
+      icon="el-icon-delete"
+      :size="size"
+      :round="round"
+      plain
+      :loading="loading"
+      :disabled="disabled"
+    >{{$t('btn.delete')}}</el-button>
+  </el-popover>
 </template>
 
 <script>

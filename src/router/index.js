@@ -56,7 +56,7 @@ const routes = [
       {
         path: 'admin/list',
         name: 'admin/list',
-        component: () => import('../views/Dashboard.vue')
+        component: () => import('../views/admin/List.vue')
       }
     ]
   },
