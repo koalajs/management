@@ -16,6 +16,8 @@ Mock.setup()
 Vue.use(VueCompositionApi)
 Vue.use(ElementUI)
 
+console.log('show utils', Vue.$utils)
+
 Vue.config.productionTip = false
 
 new Vue({
