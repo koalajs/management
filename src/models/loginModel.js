@@ -32,8 +32,8 @@ export default {
       }
     }
   },
-  setLastActive () {
-    return local.setItem(LAST_ACTIVE_KEY, new Date().getTime())
+  setLastActive (t) {
+    return local.setItem(LAST_ACTIVE_KEY, (t === undefined ? new Date().getTime() : t))
   },
   setToken (token) {
     return local.setItem(TOKEN_KEY, token)

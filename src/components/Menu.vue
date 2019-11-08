@@ -1,9 +1,6 @@
 <template>
-  <el-container>
-    <el-row class="menu">
-      <el-col :span="24">
-        <img src="@/assets/logo.png" class="logo" />
-      </el-col>
+  <div class="menu">
+    <el-row>
       <el-col :span="24">
         <el-menu
           default-active="1"
@@ -37,7 +34,7 @@
         </el-menu>
       </el-col>
     </el-row>
-  </el-container>
+  </div>
 </template>
 
 <script>
@@ -88,15 +85,20 @@ export default {
 
 <style lang="stylus" scoped>
 .menu
+  padding-top 2rem
   border 0
   .logo
-    height 15rem
+    border 1px solid #fff
+    max-height 8vh
     width 14rem
     border 0
+    img
+      width auto
+      height auto
+      max-width 100%
+      max-height 8vh
   .el-menu
     border 0
-    border-top 1px solid #ecebe3
-    padding-top 2rem
     width auto
     text-align left
     .is-active

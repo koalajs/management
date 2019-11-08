@@ -36,5 +36,5 @@ export default {
     max-height 2rem
     text-align left
   .dashboard-body
-    min-height 85vh
+    min-height 78vh
 </style>

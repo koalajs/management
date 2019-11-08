@@ -22,4 +22,33 @@ describe('models/loginModel.js', () => {
     const n = new Date().getTime()
     expect(login.diffTime(t, n)).toBe(false)
   })
+  it('Function checkTimeout, when localStorage is all full, and not timeout will return result false', async () => {
+    login.setToken('xxx')
+    login.setLastActive()
+    login.setTimeout(1)
+    const res = await login.checkTimeout()
+    const diffData = {
+      result: false
+    }
+    expect(res).toEqual(diffData)
+  })
+  it('Function checkTimeout, when localStorage is all full, and timeout will return result true and status is is_timeout', async () => {
+    login.setToken('xxx')
+    login.setLastActive(new Date().getTime() - 1000 * 60 * 2)
+    login.setTimeout(1)
+    const res = await login.checkTimeout()
+    const diffData = {
+      result: true,
+      status: 'is_timeout'
+    }
+    expect(res).toEqual(diffData)
+  })
+  it('Function checkTimeout, when localStorage is not full, will return result true and status is not login', async () => {
+    const res = await login.checkTimeout()
+    const diffData = {
+      result: true,
+      status: 'not_login'
+    }
+    expect(res).toEqual(diffData)
+  })
 })

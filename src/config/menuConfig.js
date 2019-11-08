@@ -34,12 +34,5 @@ export default [
         'role': 'cms.admin.list'
       }
     ]
-  },
-  {
-    'id': '4',
-    'title': 'menu.logout',
-    'icon': 'el-icon-s-promotion',
-    'uri': routers.CMS_LOGOUT,
-    'role': 'cms.logout'
   }
 ]
