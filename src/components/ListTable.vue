@@ -5,36 +5,37 @@
     height="73vh"
   >
     <el-table-column
-      prop="id"
-      label="ID"
-      sortable
+      v-for="r in cols"
+      :key="r.key"
+      :prop="r.key"
+      :label="r.label"
+      :sortable="r.sortable"
+      :width="r.width"
     />
-    <el-table-column
-      prop="name"
-      label="Name"
-      sortable
-    />
-    <el-table-column
-      label="状态"
-      sortable
-    >
+    <el-table-column v-if="isChangeStatus" :label="$t('common.status')">
       <template slot-scope="scope">
-        <el-switch
+        <el-select
           :value="scope.row.status"
-          active-color="#13ce66"
-          inactive-color="#661a1a"
-          @change="doChangeStatus(scope)"
-        />
+          @change="(e) => doChangeStatus(e, scope)"
+          size="small"
+        >
+          <el-option
+            v-for="i in status"
+            :key="i.value"
+            :label="$t(i.label)"
+            :value="i.value"
+          />
+        </el-select>
       </template>
     </el-table-column>
-    <el-table-column label="操作">
+    <el-table-column :label="$t('common.actions')" v-if="isActions">
       <template slot-scope="scope">
         <el-button
           @click="doEdit(scope)"
           class="btn-edit"
           size="small"
           icon="el-icon-edit"
-        > {{$t('btn.edit')}} </el-button>
+        > {{$t('common.btn_edit')}} </el-button>
         <DeleteButton
           size="small"
           @onSubmit="doDelete(scope)"
@@ -45,22 +46,29 @@
 </template>
 
 <script>
+import { filter, equals } from 'ramda'
 import DeleteButton from '@/components/DeleteButton'
 export default {
   components: {
     DeleteButton
   },
   props: {
-    data: Array
+    data: Array,
+    cols: Array,
+    status: Array,
+    isChangeStatus: Boolean,
+    isActions: Boolean
   },
-  setup (props, { roow, emit }) {
+  setup (props, { root, emit }) {
     const doEdit = s => console.log('show edit', s)
-    const doChangeStatus = s => emit('onChangeStatus', s)
+    const showStatusString = (s) => root.$t((filter((i) => equals(i.value, 1), props.status))[0].label)
+    const doChangeStatus = (e, s) => emit('onChangeStatus', e, s)
     const doDelete = s => emit('onDelete', s)
     return {
       doEdit,
       doChangeStatus,
-      doDelete
+      doDelete,
+      showStatusString
     }
   }
 }
@@ -69,4 +77,7 @@ export default {
 <style lang="stylus" scoped>
 .btn-edit
   margin-right 0.5rem
+.el-select
+  width 6rem
+  max-width 20rem
 </style>

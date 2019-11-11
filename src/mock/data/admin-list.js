@@ -7,7 +7,7 @@ export default (config) => {
       {
         'id|+1': 1,
         'name': '@cname',
-        'status': '@boolean'
+        'status|0-1': 1
       }
     ]
   })]

@@ -7,9 +7,14 @@
           <div class="body">
             <ListTable
               :data="list"
+              :cols="cols"
+              :status="statusList"
+              :isChangeStatus="true"
+              :isActions="true"
               @onChangeStatus="doChangeStatus"
               @onDelete="doDelete"
-            />
+            >
+            </ListTable>
           </div>
           <div slot="footer" class="footer">
             <el-pagination
@@ -29,6 +34,8 @@ import PanelBox from '@/components/PanelBox'
 import ListTable from '@/components/ListTable'
 import { ref, onMounted } from '@vue/composition-api'
 import adminModel from '@/models/adminModel'
+import { getErrorMessage } from '@/common/utils'
+import statusConfig from '@/config/statusConfig'
 export default {
   name: 'admin-list',
   components: {
@@ -37,12 +44,30 @@ export default {
   },
   setup (props, { root }) {
     const list = ref([])
+    const cols = ref([
+      { key: 'id', label: 'ID', sortable: true, width: '50px' },
+      { key: 'name', label: '名称', sortable: true, width: '480px' }
+    ])
+    const statusList = ref(statusConfig)
     const getList = res => res.data.data
-    const doChangeStatus = s => {
-      list.value[s.$index]['status'] = !list.value[s.$index]['status']
+    const doChangeStatus = (e, s) => {
+      adminModel.changeStatus(s.row.id, e).then(res => {
+        list.value[s.$index]['status'] = e
+        root.$message({
+          message: root.$t('common.action_success'),
+          type: 'success'
+        })
+      }).catch(e => {
+        root.$message({
+          message: getErrorMessage(e),
+          type: 'error'
+        })
+      })
     }
     const doDelete = s => {
-      console.log('删除', s)
+      adminModel.delete(s.row.id).then(res => {
+
+      })
     }
     onMounted(() => {
       adminModel.getList().then(res => {
@@ -51,6 +76,8 @@ export default {
     })
     return {
       list,
+      cols,
+      statusList,
       doChangeStatus,
       doDelete
     }

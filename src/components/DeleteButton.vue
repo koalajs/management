@@ -14,7 +14,7 @@
       plain
       :loading="loading"
       :disabled="disabled"
-    >{{$t('btn.delete')}}</el-button>
+    >{{$t('common.btn_delete')}}</el-button>
   </el-popover>
 </template>
 
