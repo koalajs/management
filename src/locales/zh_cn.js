@@ -32,5 +32,20 @@ export const dashboard = {
 export const common = {
   btn_cancel: '取消',
   btn_sure: '确定',
-  delete_message: '提醒： 您确定要删除这条记录么？'
+  delete_message: '提醒： 您确定要删除这条记录么？',
+  btn_edit: '编辑',
+  btn_delete: '删除',
+  btn_add: '新建',
+  status: '状态',
+  actions: '操作',
+  action_success: '操作完成'
+}
+
+export const status = {
+  opened: '开放',
+  closed: '关闭',
+  locked: '锁定',
+  banned: '禁止',
+  stoped: '已停止',
+  running: '运行中'
 }
