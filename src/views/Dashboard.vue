@@ -1,23 +1,17 @@
 <template>
-  <div class="dashboard">
-    <el-row class="row-body">
-      <el-col :span="24">
-        <panel-box>
-          <div slot="header-left" class="dashboard-title">{{$t('dashboard.title')}}</div>
-          <div class="dashboard-body">
-            <h1> Welcome! </h1>
-          </div>
-        </panel-box>
-      </el-col>
-    </el-row>
-  </div>
+  <PageBox class="dashboard">
+    <div slot="title">{{$t('dashboard.title')}}</div>
+    <div class="dashboard-body">
+      <h1>Welcome!</h1>
+    </div>
+  </PageBox>
 </template>
 
 <script>
-import PanelBox from '@/components/PanelBox'
+import PageBox from '@/components/PageBox'
 export default {
   components: {
-    PanelBox
+    PageBox
   }
 }
 </script>

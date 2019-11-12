@@ -1,6 +1,11 @@
 .k-bg-primary {
   background-color: #ecebe3;
 }
+
 .k-bd-1 {
   border: 1px solid red;
+}
+
+.k-text-center {
+  text-align: center;
 }

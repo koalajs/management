@@ -11,6 +11,7 @@
       :label="r.label"
       :sortable="r.sortable"
       :width="r.width"
+      :class="r.class"
     />
     <el-table-column v-if="isChangeStatus" :label="$t('common.status')">
       <template slot-scope="scope">
