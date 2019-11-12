@@ -36,6 +36,8 @@ export const common = {
   btn_edit: '编辑',
   btn_delete: '删除',
   btn_add: '新建',
+  btn_save: '保存',
+  btn_reset: '重置',
   status: '状态',
   actions: '操作',
   action_success: '操作完成'

@@ -4,7 +4,8 @@
       <div slot="title">{{$t('menu.admin_add')}}</div>
       <AddAdmin
         :item="item"
-        @save="doSave"
+        :rules="rules"
+        @onSave="doSave"
       />
     </PageBox>
   </div>
@@ -13,18 +14,30 @@
 <script>
 import PageBox from '@/components/PageBox'
 import AddAdmin from '@/components/admin/AddAdmin'
-import AdminModel from '@/models/adminModel'
-import { ref } from '@vue/composition-api'
+import adminModel from '@/models/adminModel'
+import { reactive } from '@vue/composition-api'
+import utils from '@/common/utils'
 export default {
+  name: 'admin-add',
   components: {
     PageBox,
     AddAdmin
   },
-  setup () {
-    const item = ref(AdminModel)
-    const doSave = d => console.log('show save data 2', d)
+  setup (props, { root }) {
+    const item = reactive(adminModel.data)
+    const rules = reactive(adminModel.rules)
+    const doSave = d => {
+      adminModel.save(d).then(res => root.$message({
+        message: 'good',
+        type: 'success'
+      })).catch(e => root.$message({
+        message: utils.getErrorMessage(e),
+        type: 'error'
+      }))
+    }
     return {
       item,
+      rules,
       doSave
     }
   }
