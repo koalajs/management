@@ -5,8 +5,10 @@ import * as data from './data'
 export default {
   setup: () => {
     const Mock = new MockAdapter(api)
-    Mock.onPost('/authorize').replyOnce(500)
+    Mock.onPost('/authorize').replyOnce(401, data.authorize)
     Mock.onPost('/authorize').reply(data.authorize)
+    Mock.onGet('/admin').reply(data.adminList)
+    Mock.onPut(new RegExp(`/admin/status/*`)).reply(data.adminStatus)
     Mock.onGet(new RegExp(`/user/*`)).reply(data.user)
     Mock.onGet('/users').reply(data.users)
     Mock.onGet('/networkerror').networkError()

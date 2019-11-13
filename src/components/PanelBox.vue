@@ -1,13 +1,13 @@
 <template>
   <div class="panel-box">
     <el-row class="header">
-      <el-col :span="8">
+      <el-col :span="8" class="header-left">
         <slot name="header-left" />
       </el-col>
-      <el-col :span="8">
+      <el-col :span="8" class="header-center">
         <slot name="header-center" />
       </el-col>
-      <el-col :span="8">
+      <el-col :span="8" class="header-right">
         <slot name="header-right" />
       </el-col>
     </el-row>
@@ -31,4 +31,7 @@
     min-height 3rem
     padding 0.5rem
     width 100%
+  .header-left
+    text-align left
+    padding-left 0.5rem
 </style>

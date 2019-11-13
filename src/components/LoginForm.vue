@@ -45,6 +45,7 @@ import { SchemaModel, StringType } from 'schema-typed'
 import { reduce, reduced, values, propOr } from 'ramda'
 import { ref, reactive, computed } from '@vue/composition-api'
 import { CMS_DASHBOARD } from '@/common/routers'
+import { getErrorMessage } from '@/common/utils'
 export default {
   name: 'LoginForm',
   setup (props, { root }) {
@@ -102,7 +103,7 @@ export default {
         }).catch(e => {
           setIsRequest(false)
           root.$message({
-            message: root.$t('login.login_failed'),
+            message: getErrorMessage(e),
             type: 'error'
           })
         })

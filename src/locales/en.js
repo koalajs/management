@@ -20,7 +20,9 @@ export const menu = {
   admin: 'Admin',
   admin_add: 'Add Admin',
   admin_list: 'Admin List',
-  logout: 'Logout'
+  logout: 'Logout',
+  change_password: 'Change Password',
+  profile: 'Profile'
 }
 
 export const dashboard = {
@@ -30,5 +32,20 @@ export const dashboard = {
 export const common = {
   btn_cancel: 'Cancel',
   btn_sure: 'Sure',
-  delete_message: 'Warning: Are you sure you want to delete this item?'
+  delete_message: 'Warning: Are you sure you want to delete this item?',
+  btn_edit: 'Edit',
+  btn_delete: 'Delete',
+  btn_add: 'Create',
+  status: 'Status',
+  actions: 'Actions',
+  action_success: 'Successfully!'
+}
+
+export const status = {
+  opened: 'Opened',
+  closed: 'Closed',
+  locked: 'Locked',
+  banned: 'Banned',
+  stoped: 'Stoped',
+  running: 'Running'
 }

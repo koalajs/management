@@ -11,7 +11,11 @@
             :key="i.value"
             :label="i.label"
             :value="i.value"
-          />
+          >
+            <template>
+              <span v-html="i.icon"></span> {{i.label}}
+            </template>
+          </el-option>
         </el-select>
       </el-col>
     </el-row>
