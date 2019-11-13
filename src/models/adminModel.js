@@ -5,9 +5,8 @@ export default {
   init: {
     id: null,
     name: '',
-    username: '',
     phone: '',
-    rules: ['cms.admin'],
+    roles: ['cms.admin'],
     status: 1
   },
   rules: {
@@ -15,13 +14,9 @@ export default {
       { required: true, message: '姓名不能为空', trigger: 'blur' },
       { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
     ],
-    username: [
-      { required: true, message: '用户名不能为空', trigger: 'blur' },
-      { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-    ],
     phone: [
       { required: true, message: '手机号不能为空', trigger: 'blur' },
-      { length: 11, message: '必须是一个合法的手机号', trigger: 'blur' }
+      { len: 11, message: '必须是一个合法的手机号', trigger: 'blur' }
     ]
   },
   save (d) {

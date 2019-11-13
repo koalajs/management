@@ -1,5 +1,5 @@
 import Mockjs from 'mockjs'
-import rules from '@/config/rulesConfig'
+import roles from '@/config/rolesConfig'
 import { reduce, append } from 'ramda'
 
 export default (config) => {
@@ -9,7 +9,7 @@ export default (config) => {
       status: 'success',
       data: {
         token: '@string(67)',
-        roles: reduce((a, v) => append(v.key, a), [], rules),
+        roles: reduce((a, v) => append(v.key, a), [], roles),
         timeout: 30
       }
     })

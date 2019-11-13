@@ -3,9 +3,6 @@
     <el-form-item label="姓名" prop="name">
       <el-input v-model="data.name"></el-input>
     </el-form-item>
-    <el-form-item label="用户名" prop="username">
-      <el-input v-model="data.username"></el-input>
-    </el-form-item>
     <el-form-item label="手机号" prop="phone">
       <el-input v-model="data.phone"></el-input>
     </el-form-item>
@@ -16,7 +13,7 @@
         :filter-method="filterMethod"
         filter-placeholder="请输入拼音"
         v-model="data.rules"
-        :data="rules">
+        :data="roles">
       </el-transfer>
     </el-form-item>
     <el-form-item>
@@ -28,17 +25,20 @@
 
 <script>
 import { reactive, ref } from '@vue/composition-api'
-import rulesConfig from '@/config/rulesConfig'
+import rolesConfig from '@/config/rolesConfig'
 import { reject, includes } from 'ramda'
 export default {
   props: {
-    item: Object
+    item: Object,
+    rules: Object
   },
   setup (props, { emit, refs }) {
     const data = reactive(props.item)
-    const getRules = (all, has) => reject(item => includes(item.key, all), all)
-    const rules = ref(getRules(rulesConfig, data.rules))
-    const resetForm = f => refs['form'].resetFields()
+    const getRoles = (all, has) => reject(item => includes(item.key, all), all)
+    const roles = ref(getRoles(rolesConfig, data.roles))
+    const resetForm = f => {
+      refs['form'].resetFields()
+    }
     const doSave = formName => {
       refs[formName].validate(valid => {
         if (valid) {
@@ -53,7 +53,7 @@ export default {
     }
     return {
       data,
-      rules,
+      roles,
       doSave,
       resetForm,
       filterMethod
