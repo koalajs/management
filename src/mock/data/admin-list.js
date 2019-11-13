@@ -7,7 +7,8 @@ export default (config) => {
       {
         'id|+1': 1,
         'name': '@cname',
-        'status|0-1': 1
+        'status|0-1': 1,
+        'roles': ['cms.admin', 'cms.admin.add']
       }
     ]
   })]

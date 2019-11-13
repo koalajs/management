@@ -1,12 +1,13 @@
 import api from '@/plugins/api'
 import { isNil } from 'ramda'
 export default {
-  data: {
+  data: {},
+  init: {
     id: null,
     name: '',
     username: '',
     phone: '',
-    rules: [],
+    rules: ['cms.admin'],
     status: 1
   },
   rules: {
@@ -23,9 +24,6 @@ export default {
       { length: 11, message: '必须是一个合法的手机号', trigger: 'blur' }
     ]
   },
-  init (data) {
-    this.data = data
-  },
   save (d) {
     return isNil(d.id) ? this.create(d) : this.update(d)
   },
@@ -37,5 +35,8 @@ export default {
   },
   delete (id) {
     return api.delete(`admin/${id}`)
+  },
+  getItemByID (id) {
+    return api.get(`admin/${id}`)
   }
 }

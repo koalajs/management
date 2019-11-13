@@ -9,6 +9,16 @@
     <el-form-item label="手机号" prop="phone">
       <el-input v-model="data.phone"></el-input>
     </el-form-item>
+    <el-form-item label="权限管理">
+      <el-transfer
+        :titles="['可选权限', '已有权限']"
+        filterable
+        :filter-method="filterMethod"
+        filter-placeholder="请输入拼音"
+        v-model="data.rules"
+        :data="rules">
+      </el-transfer>
+    </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="doSave('form')">{{$t('common.btn_save')}}</el-button>
       <el-button @click="resetForm('form')">{{$t('common.btn_reset')}}</el-button>
@@ -17,14 +27,17 @@
 </template>
 
 <script>
-import { reactive } from '@vue/composition-api'
+import { reactive, ref } from '@vue/composition-api'
+import rulesConfig from '@/config/rulesConfig'
+import { reject, includes } from 'ramda'
 export default {
   props: {
-    item: Object,
-    rules: Object
+    item: Object
   },
   setup (props, { emit, refs }) {
     const data = reactive(props.item)
+    const getRules = (all, has) => reject(item => includes(item.key, all), all)
+    const rules = ref(getRules(rulesConfig, data.rules))
     const resetForm = f => refs['form'].resetFields()
     const doSave = formName => {
       refs[formName].validate(valid => {
@@ -35,10 +48,15 @@ export default {
         }
       })
     }
+    const filterMethod = (query, item) => {
+      return item.pinyin.indexOf(query) > -1
+    }
     return {
       data,
+      rules,
       doSave,
-      resetForm
+      resetForm,
+      filterMethod
     }
   }
 }
@@ -48,4 +66,6 @@ export default {
 .add-admin
   margin 2rem
   width 70vw
+.el-transfer
+  text-align left
 </style>
