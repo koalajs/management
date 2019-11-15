@@ -61,7 +61,7 @@ export default {
     isActions: Boolean
   },
   setup (props, { root, emit }) {
-    const doEdit = s => console.log('show edit', s)
+    const doEdit = s => emit('onEdit', s)
     const showStatusString = (s) => root.$t((filter((i) => equals(i.value, 1), props.status))[0].label)
     const doChangeStatus = (e, s) => emit('onChangeStatus', e, s)
     const doDelete = s => emit('onDelete', s)

@@ -65,7 +65,7 @@ export default {
 <style lang="stylus" scoped>
 .add-admin
   margin 2rem
-  width 70vw
+  width 70%
 .el-transfer
   text-align left
 </style>
