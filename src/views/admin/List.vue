@@ -10,6 +10,7 @@
         :isActions="true"
         @onChangeStatus="doChangeStatus"
         @onDelete="doDelete"
+        @onEdit="showEditForm"
       ></ListTable>
       <div slot="footer" class="footer">
         <el-pagination
@@ -18,6 +19,13 @@
           :total="total"
         />
       </div>
+      <el-dialog
+        title="Edit"
+        :visible.sync="showEditDialog"
+        width="60%"
+      >
+        <Save />
+      </el-dialog>
     </PageBox>
   </div>
 </template>
@@ -29,15 +37,18 @@ import { ref, onMounted } from '@vue/composition-api'
 import adminsModel from '@/models/adminsModel'
 import { getErrorMessage } from '@/common/utils'
 import statusConfig from '@/config/statusConfig'
+import Save from '@/components/admin/Save'
 export default {
   name: 'admin-list',
   components: {
     PageBox,
+    Save,
     ListTable
   },
   setup (props, { root }) {
     const list = ref([])
     const total = ref(10)
+    const showEditDialog = ref(false)
     const cols = ref([
       { key: 'id', label: 'ID', sortable: true, width: '80px' },
       { key: 'name', label: '名称', sortable: true, width: '480px' }
@@ -62,7 +73,11 @@ export default {
         })
     }
     const doDelete = s => {
-      adminsModel.delete(s.row.id).then(res => {})
+      adminsModel.delete(s.row.id).then(res => {
+      })
+    }
+    const showEditForm = s => {
+      showEditDialog.value = true
     }
     onMounted(() => {
       adminsModel.getList().then(res => {
@@ -72,9 +87,11 @@ export default {
     return {
       list,
       total,
+      showEditDialog,
       cols,
       statusList,
       doChangeStatus,
+      showEditForm,
       doDelete
     }
   }

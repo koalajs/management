@@ -1,4 +1,6 @@
 import Mockjs from 'mockjs'
+import roles from '@/config/rolesConfig'
+import { reduce, append } from 'ramda'
 
 export default (config) => {
   return [
@@ -7,7 +9,7 @@ export default (config) => {
       status: 'success',
       data: {
         token: '@string(67)',
-        roles: ['cms.system', 'cms.admin', 'cms.admin.add', 'cms.admin.list'],
+        roles: reduce((a, v) => append(v.key, a), [], roles),
         timeout: 30
       }
     })

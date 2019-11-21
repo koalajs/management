@@ -36,6 +36,8 @@ export const common = {
   btn_edit: 'Edit',
   btn_delete: 'Delete',
   btn_add: 'Create',
+  btn_save: 'Save',
+  btn_reset: 'Reset',
   status: 'Status',
   actions: 'Actions',
   action_success: 'Successfully!'
