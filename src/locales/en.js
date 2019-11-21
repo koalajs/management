@@ -22,7 +22,12 @@ export const menu = {
   admin_list: 'Admin List',
   logout: 'Logout',
   change_password: 'Change Password',
-  profile: 'Profile'
+  profile: 'Profile',
+  location: 'Location',
+  prize: 'Prizes',
+  game: 'Games',
+  promotion: 'Promotions',
+  logs: 'System Logs'
 }
 
 export const dashboard = {

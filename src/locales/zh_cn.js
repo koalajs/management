@@ -22,7 +22,19 @@ export const menu = {
   admin_list: '管理员列表',
   logout: '退出系统',
   change_password: '修改密码',
-  profile: '个人资料'
+  profile: '个人资料',
+  location: '场景管理',
+  location_add: '添加场景',
+  location_list: '场景列表',
+  prize: '奖品管理',
+  prize_add: '添加奖品',
+  prize_list: '奖品列表',
+  prize_import: '导入奖品',
+  game: '游戏管理',
+  game_add: '新游戏',
+  game_list: '游戏列表',
+  promotion: '活动管理',
+  logs: '系统监控'
 }
 
 export const dashboard = {

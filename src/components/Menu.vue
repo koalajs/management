@@ -12,7 +12,7 @@
             <template v-if="hasRole(r)">
             <el-submenu v-if="hasChildren(r)" :key="getRowID(r)" :index="getRowID(r)">
               <template slot="title">
-                <i :class="getIcon(r)"></i>
+                <!-- <i :class="getIcon(r)"></i> -->
                 <span>{{getTitle(r)}}</span>
               </template>
               <el-menu-item-group>
@@ -25,7 +25,7 @@
             </el-submenu>
             <el-menu-item v-else :key="getRowID(r)" :index="getRowID(r)" @click="openURI(getURI(r))">
               <template slot="title">
-                <i :class="getIcon(r)"></i>
+                <!-- <i :class="getIcon(r)"></i> -->
                 <span>{{getTitle(r)}}</span>
               </template>
             </el-menu-item>
