@@ -100,6 +100,21 @@ export default [
     pinyin: 'cms.promotion huodongguanli'
   },
   {
+    key: 'cms.promotion.add',
+    label: '活动: 添加',
+    pinyin: 'cms.promotion.add youxiguanli'
+  },
+  {
+    key: 'cms.promotion.edit',
+    label: '活动: 修改',
+    pinyin: 'cms.promotion.edit youxiguanli'
+  },
+  {
+    key: 'cms.promotion.delete',
+    label: '活动: 删除',
+    pinyin: 'cms.promotion.delete youxiguanli'
+  },
+  {
     key: 'cms.logs',
     label: '系统监测',
     pinyin: 'cms.logs xitongjiance'

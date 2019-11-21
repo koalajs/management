@@ -34,6 +34,8 @@ export const menu = {
   game_add: '新游戏',
   game_list: '游戏列表',
   promotion: '活动管理',
+  promotion_add: '创建新活动',
+  promotion_list: '活动列表',
   logs: '系统监控'
 }
 

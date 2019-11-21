@@ -23,10 +23,19 @@ export const menu = {
   logout: 'Logout',
   change_password: 'Change Password',
   profile: 'Profile',
-  location: 'Location',
+  location: 'Locations',
+  location_add: 'New Location',
+  location_list: 'Locations List',
   prize: 'Prizes',
+  prize_add: 'New Prize',
+  prize_list: 'Prizes List',
+  prize_import: 'Import Prizes',
   game: 'Games',
+  game_add: 'New Game',
+  game_list: 'Games List',
   promotion: 'Promotions',
+  promotion_add: 'New Promotion',
+  promotion_list: 'Promotions List',
   logs: 'System Logs'
 }
 
