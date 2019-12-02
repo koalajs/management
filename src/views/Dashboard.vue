@@ -3,15 +3,32 @@
     <div slot="title">{{$t('dashboard.title')}}</div>
     <div class="dashboard-body">
       <h1>Welcome!</h1>
+      <files
+        @onChoose="choose"
+      />
+      <div>{{msg}}</div>
     </div>
   </PageBox>
 </template>
 
 <script>
 import PageBox from '@/components/PageBox'
+import Files from '@/components/files/Files'
 export default {
   components: {
-    PageBox
+    PageBox,
+    Files
+  },
+  data () {
+    return {
+      msg: ''
+    }
+  },
+  methods: {
+    choose (e) {
+      console.log('show url', e)
+      this.msg = e
+    }
   }
 }
 </script>
